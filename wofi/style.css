@@ -1,0 +1,84 @@
+
+* {
+    font-family: "CaskaydiaCove Nerd Font", sans-serif;
+    font-size: 16px;
+    border: none;
+    box-shadow: none;
+    transition: none;
+}
+
+#window {
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 400px; /* or adjust to your layout */
+}
+
+#outer-box {
+    margin: 0px;
+    background-color: #1f1f1f;
+    border-radius: 0px;
+}
+
+#input {
+    margin: 0px;
+    padding: 8px;
+    border: none;
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    border-radius: 0px;
+}
+
+#inner-box {
+    background-color: #1a1a1a;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+#scroll {
+    margin: 0px;
+    background-color: #1a1a1a;
+    font-size: 16px;
+    color: #f0f0f0;
+    border-radius: 0px;
+    overflow-x: hidden; /* remove horizontal scrollbar */
+}
+
+#scroll label {
+    margin: 2px 6px;
+}
+
+#entry {
+    margin: 0px;
+    padding: 6px;
+    border-radius: 0px;
+    background-color: #1a1a1a;
+}
+
+#entry:selected {
+    background-color: #333333;
+    border: none;
+}
+
+#img {
+    margin: 2px;
+}
+
+#img:selected {
+    background-color: #333333;
+    border-radius: 0px;
+}
+
+#text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%; /* or a set value like 300px */
+}
+
+#text:selected {
+    background-color: transparent;
+    color: #f0f0f0;
+}
+

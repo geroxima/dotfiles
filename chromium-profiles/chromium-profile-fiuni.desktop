@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Chromium (FIUNI)
+Comment=Open Chromium with FIUNI profile
+Exec=chromium --profile-directory="Profile 2"
+Icon=chromium
+Terminal=false
+Categories=Network;WebBrowser;
+StartupNotify=true
+

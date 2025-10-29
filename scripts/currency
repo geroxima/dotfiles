@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# currency-converter.sh
+# Usage: 
+#   ./currency-converter.sh 100         # Convert 100 USD to PYG
+#   ./currency-converter.sh 7300 pyg    # Convert 7300 PYG to USD
+#   ./currency-converter.sh 100 usd     # Convert 100 USD to PYG
+
+# Function to get current USD/PYG rate from Cambios Chaco
+get_exchange_rate() {
+    local url="https://www.cambioschaco.com.py/en/"
+    
+    # Try to extract the purchase rate (more reliable for buying USD)
+    local rate=$(curl -s "$url" | \
+                grep -A 10 'id="exchange-usd"' | \
+                grep 'purchase' | \
+                sed 's/.*<span class="purchase">\([0-9.]*\)<\/span>.*/\1/' 2>/dev/null)
+    
+    # If that fails, try the sale rate
+    if [[ -z "$rate" ]] || ! [[ "$rate" =~ ^[0-9.]+$ ]]; then
+        rate=$(curl -s "$url" | \
+              grep -A 10 'id="exchange-usd"' | \
+              grep 'sale' | \
+              sed 's/.*<span class="sale">\([0-9.]*\)<\/span>.*/\1/' 2>/dev/null)
+    fi
+    
+    # Validate the rate
+    if [[ -z "$rate" ]] || ! [[ "$rate" =~ ^[0-9.]+$ ]]; then
+        echo "Error: Could not retrieve exchange rate from $url" >&2
+        echo "Using fallback rate: 7300" >&2
+        echo "7300"  # Fallback rate
+        return 1
+    fi
+    
+    echo "$rate"
+    return 0
+}
+
+# Function to convert USD to PYG
+usd_to_pyg() {
+    local usd_amount=$1
+    local exchange_rate=$2
+    local result=$(echo "$usd_amount * $exchange_rate" | bc -l)
+    printf "%.2f" "$result"
+}
+
+# Function to convert PYG to USD
+pyg_to_usd() {
+    local pyg_amount=$1
+    local exchange_rate=$2
+    local result=$(echo "$pyg_amount / $exchange_rate" | bc -l)
+    printf "%.2f" "$result"
+}
+
+# Main script
+main() {
+    # Get the exchange rate
+    exchange_rate=$(get_exchange_rate)
+    
+    # Parse command line arguments
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: $0 <amount> [currency]"
+        echo "  <amount>          : Amount to convert (required)"
+        echo "  [currency]        : 'usd' or 'pyg' (default: usd)"
+        echo ""
+        echo "Examples:"
+        echo "  $0 100           # Convert 100 USD to PYG"
+        echo "  $0 73000 pyg     # Convert 73000 PYG to USD"
+        echo "  $0 50 usd        # Convert 50 USD to PYG"
+        echo ""
+        echo "Current exchange rate: $exchange_rate PYG/USD"
+        exit 1
+    fi
+    
+    amount=$1
+    currency=${2:-usd}  # Default to USD if no currency specified
+    
+    # Validate amount
+    if ! [[ "$amount" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+        echo "Error: Amount must be a number" >&2
+        exit 1
+    fi
+    
+    # Perform conversion based on currency type
+    case "${currency,,}" in  # Convert to lowercase
+        usd|dollar|us)
+            pyg_result=$(usd_to_pyg "$amount" "$exchange_rate")
+            printf "%.2f USD = %.2f PYG (Rate: %s PYG/USD)\n" \
+                   "$amount" "$pyg_result" "$exchange_rate"
+            ;;
+        pyg|gs|guarani)
+            usd_result=$(pyg_to_usd "$amount" "$exchange_rate")
+            printf "%.2f PYG = %.2f USD (Rate: %s PYG/USD)\n" \
+                   "$amount" "$usd_result" "$exchange_rate"
+            ;;
+        *)
+            echo "Error: Unknown currency '$currency'. Use 'usd' or 'pyg'" >&2
+            exit 1
+            ;;
+    esac
+}
+
+# Run main function with all arguments
+main "$@"

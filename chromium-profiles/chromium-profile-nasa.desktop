@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Chromium (NASA)
+Comment=Open Chromium with NASA Space Apps profile
+Exec=chromium --profile-directory="Profile 3"
+Icon=chromium
+Terminal=false
+Categories=Network;WebBrowser;
+StartupNotify=true
+

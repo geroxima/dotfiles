@@ -1,0 +1,136 @@
+* {
+	border: none;
+	font-family: "CaskaydiaCove Nerd Font", sans-serif;
+	font-size: 16px;
+	min-height: 0;
+}
+
+window#waybar {
+	background-color: rgba(245, 245, 245, 0.9);
+	color: #1e1e1e;
+	margin: 8px;
+}
+
+#workspaces,
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#language {
+	margin: 0 4px;
+	padding: 4px 10px;
+	border-radius: 0px;
+	background-color: transparent;
+	color: #1e1e1e;
+}
+
+/* Workspace buttons */
+#workspaces button {
+	color: #555;
+	padding: 2px 4px;
+	margin: 0px;
+	border-radius: 0px;
+}
+
+#workspaces button.visible,
+#workspaces button.focused {
+	background-color: #d0d0d0;
+	color: #000;
+}
+
+#workspaces button.urgent {
+	background-color: #d72638;
+	color: white;
+}
+
+#workspaces button:hover {
+	background-color: #c0c0c0;
+	color: #000;
+}
+
+/* Specific module styling */
+#window {
+	font-style: italic;
+}
+
+#battery.charging {
+	background-color: #c0e890;
+	color: #1d2b1f;
+}
+
+#battery.critical:not(.charging) {
+	background-color: #d72638;
+	color: white;
+	animation: blink 0.6s linear infinite alternate;
+}
+
+#network.disconnected {
+	background-color: #d72638;
+	color: white;
+}
+
+#temperature.critical {
+	background-color: #d72638;
+	color: white;
+}
+
+#idle_inhibitor.activated {
+	background-color: #1e1e1e;
+	color: #f0f0f0;
+}
+
+#custom-media {
+	min-width: 100px;
+	color: #2a5c45;
+}
+
+#custom-media.custom-spotify {
+	background-color: #1db954;
+}
+
+#custom-media.custom-vlc {
+	background-color: #ffb300;
+}
+
+#mpd.stopped {
+	background-color: #e0e0e0;
+	color: #333;
+}
+
+#mpd.paused {
+	background-color: #a0d0b0;
+	color: #1e1e1e;
+}
+
+#mpd.disconnected {
+	background-color: #d72638;
+	color: white;
+}
+
+#language {
+	background: #ddeeff;
+	color: #2e2e2e;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+@keyframes blink {
+	to {
+		background-color: #1e1e1e;
+		color: #ffffff;
+	}
+}
+
+label:focus {
+	background-color: #cccccc;
+}

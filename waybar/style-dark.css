@@ -1,0 +1,133 @@
+* {
+	border: none;
+	font-family: "CaskaydiaCove Nerd Font", sans-serif;
+	font-size: 16px;
+	min-height: 0;
+}
+
+window#waybar {
+	background-color: rgba(30, 30, 30, 0.8);
+	color: #ecdfcc;
+	margin: 8px;
+}
+
+#workspaces,
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#language {
+	margin: 0 4px;
+	padding: 4px 10px;
+	border-radius: 0px;
+	background-color: transparent;
+	color: #ecdfcc;
+}
+
+/* Workspace buttons */
+#workspaces button {
+	color: #888;
+	padding: 2px 6px;
+	margin: 0px;
+	border-radius: 0px;
+}
+
+#workspaces button.visible,
+#workspaces button.focused {
+	background-color: #50575e;
+	color: #ecdfcc;
+}
+
+#workspaces button.urgent {
+	background-color: #eb4d4b;
+	color: white;
+}
+
+#workspaces button:hover {
+	background-color: #5c6773;
+	color: white;
+}
+
+/* Specific module styling */
+#window {
+	font-style: italic;
+}
+
+#battery.charging {
+	background-color: #a4c400;
+	color: #1d2b1f;
+}
+
+#battery.critical:not(.charging) {
+	background-color: #d72638;
+	color: white;
+	animation: blink 0.6s linear infinite alternate;
+}
+
+#network.disconnected {
+	background-color: #d72638;
+	color: white;
+}
+
+#temperature.critical {
+	background-color: #d72638;
+	color: white;
+}
+
+#idle_inhibitor.activated {
+	background-color: #ecdfcc;
+	color: #2d3436;
+}
+
+#custom-media {
+	min-width: 100px;
+	color: #2a5c45;
+}
+
+#custom-media.custom-spotify {
+	background-color: #1db954;
+}
+
+#custom-media.custom-vlc {
+	background-color: #ffb300;
+}
+
+#mpd.stopped {
+	background-color: #90b1b1;
+}
+
+#mpd.paused {
+	background-color: #51a37a;
+}
+
+#mpd.disconnected {
+	background-color: #d72638;
+}
+
+#language {
+	background: #bbccdd;
+	color: #2e2e2e;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+@keyframes blink {
+	to {
+		background-color: #ffffff;
+		color: #000000;
+	}
+}
+
+label:focus {
+	background-color: #000000;
+}

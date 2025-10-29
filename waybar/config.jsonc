@@ -1,0 +1,124 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 5,
+  "margin-top": 0,
+  "margin-right": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "pulseaudio",
+    "cpu",
+    "memory",
+    "temperature",
+    "custom/gammarelay",
+    "backlight",
+    "battery",
+    "network",
+    "tray"
+  ],
+
+  "hyprland/window": {
+    "format": "{}",
+    "icon": true,
+    "separate-outputs": true
+  },
+
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "tooltip": false
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "spacing": 3,
+    "icon-size": 16,
+    "on-click": "activate",
+    "tooltip-format": "{title}"
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+
+  "custom/gammarelay": {
+    "exec": "~/.config/waybar/scripts/gammarelay-toggle.sh",
+    "interval": 1
+  },
+
+  "tray": {
+    "spacing": 10
+  },
+
+  "clock": {
+    "format": "{:%I:%M %p, %a %b %d}"
+  },
+
+  "cpu": {
+    "format": "{usage}% 󰻠",
+    "tooltip": true
+  },
+
+  "memory": {
+    "format": "{}% "
+  },
+
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""]
+  },
+
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "󰂋 {capacity}%",
+    "format-plugged": "{capacity}%",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "network": {
+    "format-wifi": "{essid} ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected"
+  },
+
+  "pulseaudio": {
+    "scroll-step": 5,
+    "max-volume": 150,
+    "format": "{icon} {volume}%",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-bluetooth-muted": " {format_source}",
+    "format-bluetooth": "󰂯 {volume}%",
+    "format-icons": {
+      "default": ["", "", " "],
+      "bluez_output.83_AC_60_0E_FF_E3.1": "\udb82\udd70"
+    },
+    "nospacing": 1,
+    "format-muted": "",
+    "on-click": "pavucontrol",
+    "tooltip": false
+  }
+}
+
