@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Classroom (FIUNI)
+Comment=Open example.com with Chromium Profile 2
+Exec=chromium --profile-directory="Profile 2" https://classroom.google.com
+Icon=chromium
+Terminal=false
+Categories=Network;WebBrowser;Education;
+StartupNotify=true
+
